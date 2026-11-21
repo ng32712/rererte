@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/assets/fonts/DMSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/assets/fonts/DMSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/assets/fonts/DMSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/assets/fonts/DMMono-Regular.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Plus Jakarta Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* CraftedLabs Editorial Palette + Demo Landing Page Pine Sage Accent */
+  --bg: #D6F0EE;
+  --surface: #FFFDF7;
+  --surface-elevated: #F4F1E8;
+  --pastel-pink: #F8D7DF;
+  --pastel-yellow: #F7EDB8;
+  --pastel-lavender: #E5DDF5;
+  --footer-bg: #252426;
+
+  --text-primary: #202020;
+  --text-secondary: #5C5C5C;
+  --text-muted: #777777;
+  --border: rgba(32, 32, 32, 0.11);
+  --border-strong: rgba(32, 32, 32, 0.22);
+
+  /* Accent color preserved from demo landing page */
+  --accent: #3d5740;
+  --accent-hover: #314734;
+  --accent-soft: rgba(61, 87, 64, 0.12);
+  --accent-text: #FFFDF7;
+
+  --glass-bg: rgba(255, 253, 247, 0.82);
+  --glass-border: rgba(32, 32, 32, 0.12);
+  --shadow-tinted: 0 24px 60px rgba(32, 32, 32, 0.08);
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-serif-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-mono-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle architectural grain */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: radial-gradient(rgba(32, 32, 32, 0.55) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* 3D Hero Pointer-Tracking Stage */
+.hero-stage-3d {
+  perspective: 1200px;
+}
+
+.collage-tilt-wrap {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.collage-shadow {
+  width: 68%;
+  height: 24px;
+  margin-inline: auto;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(32, 32, 32, 0.22) 0%, transparent 72%);
+  filter: blur(10px);
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.float-slow {
+  animation: floatSlow 5.8s ease-in-out infinite;
+}
+
+.float-reverse {
+  animation: floatReverse 6.4s ease-in-out infinite;
+}
+
+/* Marquee Ticker */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Pinned 4-Stage Wipe Showcase (preserved from demo landing page) */
+.showcase-pin {
+  position: relative;
+  width: 100%;
+  min-height: 92dvh;
+}
+
+.showcase-viewport {
+  position: relative;
+  width: 100%;
+  height: 92dvh;
+  overflow: hidden;
+  background: #252426;
+}
+
+.showcase-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(20, 22, 20, 0.82) 0%,
+    rgba(20, 22, 20, 0.34) 44%,
+    rgba(20, 22, 20, 0.12) 100%
+  );
+}
+
+.showcase-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(0 0 0 100%);
+  will-change: clip-path, transform;
+}
+
+.showcase-frame.is-active {
+  clip-path: inset(0 0 0 0);
+}
+
+.showcase-caption {
+  transition: filter 220ms var(--ease-out), opacity 220ms var(--ease-out);
+}
+
+.showcase-caption.is-blurring {
+  filter: blur(3px);
+  opacity: 0.65;
+}
+
+/* Tactile button press */
+.btn-tactile {
+  transition: transform 160ms var(--ease-out), background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+
+.btn-tactile:active {
+  transform: scale(0.97);
+}
+
+/* Slide-Over Drawer Animation */
+.drawer-panel {
+  transition: transform 340ms var(--ease-drawer);
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .collage-tilt-wrap {
+    transform: none !important;
+  }
+}
